@@ -1,0 +1,44 @@
+name: evigdog-studio-cloud
+
+services:
+  frontend:
+    container_name: evigdog-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "${FRONTEND_PORT:-8080}:80"
+    restart: unless-stopped
+    depends_on:
+      - backend
+
+  backend:
+    container_name: evigdog-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      PORT: 3000
+      MONGODB_URI: mongodb://mongo:27017
+      MONGODB_DB: ${MONGODB_DB:-evigdog_db}
+      MONGODB_USERNAME: ${MONGODB_USERNAME:-}
+      MONGODB_PASSWORD: ${MONGODB_PASSWORD:-}
+      ADMIN_ACCESS_CODE: ${ADMIN_ACCESS_CODE:-evigdog-admin-2026}
+    ports:
+      - "${BACKEND_PORT:-3000}:3000"
+    restart: unless-stopped
+    depends_on:
+      - mongo
+
+  mongo:
+    container_name: evigdog-mongo
+    image: mongo:7
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGODB_DB:-evigdog_db}
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
+

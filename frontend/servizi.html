@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Servizi — EvigDog Studio</title>
+    <meta
+      name="description"
+      content="Sei discipline integrate per far crescere il tuo brand: Brand Identity, Web Design & Dev, UI/UX, Motion & 3D, Strategia & Marketing, Fotografia & Video."
+    />
+    <link rel="stylesheet" href="/css/variables.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <link rel="stylesheet" href="/css/pages.css" />
+  </head>
+  <body>
+    <div id="site-header-mount"></div>
+
+    <main>
+      <!-- 1. SPLIT HERO (SERVIZI.css) -->
+      <section class="split-hero">
+        <div class="split-hero-left">
+          <div>
+            <span class="split-hero-eyebrow">COSA FACCIAMO</span>
+            <h1 class="split-hero-title">
+              Costruiamo<br />
+              <span class="text-terracotta">esperienze</span><br />
+              che durano.
+            </h1>
+            <p class="split-hero-desc">
+              Sei discipline integrate, un unico interlocutore. Dal posizionamento strategico alla
+              messa online, accompagniamo i brand ambiziosi in ogni punto di contatto digitale.
+            </p>
+          </div>
+
+          <img
+            src="/assets/images/logo-horizontal-gold.svg"
+            alt=""
+            class="split-hero-watermark-logo"
+            aria-hidden="true"
+          />
+
+          <div class="split-hero-stats">
+            <div>
+              <div class="hero-stat-num">06</div>
+              <div class="hero-stat-label">Discipline</div>
+            </div>
+            <div>
+              <div class="hero-stat-num">120+</div>
+              <div class="hero-stat-label">Progetti Consegnati</div>
+            </div>
+            <div>
+              <div class="hero-stat-num">8 yr</div>
+              <div class="hero-stat-label">Esperienza</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="split-hero-right servizi-hero-right-bg">
+          <div class="servizi-mini-index">
+            <div class="servizi-mini-cell">
+              <span>01</span>
+              <strong>Brand Identity</strong>
+            </div>
+            <div class="servizi-mini-cell">
+              <span>02</span>
+              <strong>Web Design &amp; Dev</strong>
+            </div>
+            <div class="servizi-mini-cell">
+              <span>03</span>
+              <strong>UI/UX Design</strong>
+            </div>
+            <div class="servizi-mini-cell">
+              <span>04</span>
+              <strong>Motion &amp; 3D</strong>
+            </div>
+            <div class="servizi-mini-cell">
+              <span>05</span>
+              <strong>Strategia &amp; Marketing</strong>
+            </div>
+            <div class="servizi-mini-cell">
+              <span>06</span>
+              <strong>Fotografia &amp; Video</strong>
+            </div>
+          </div>
+          <div></div>
+        </div>
+      </section>
+
+      <!-- 2. MARQUEE STRIP -->
+      <div class="marquee-mount"></div>
+
+      <!-- 3. SERVICES LIST & STATS (#3D1C08) -->
+      <section class="services-list-section">
+        <div class="section-watermark" style="right: -20px; top: 40px;" aria-hidden="true">CRAFT</div>
+        <div class="section-watermark" style="left: 40px; bottom: 20px;" aria-hidden="true">120+</div>
+
+        <div class="container">
+          <div class="section-header-row" style="border-bottom: none; margin-bottom: 16px;">
+            <div>
+              <span class="eyebrow">Competenze</span>
+              <h2 class="section-title">I Nostri Servizi</h2>
+            </div>
+            <span style="font-size: 13px; color: rgba(255, 255, 255, 0.6);">
+              Soluzioni su misura per ogni fase di crescita
+            </span>
+          </div>
+
+          <div class="service-detail-list" id="services-detail-mount">
+            <!-- Populated dynamically from /api/services -->
+          </div>
+
+          <!-- 4-Column Stats Row inside ServicesList -->
+          <div class="stats-band-grid">
+            <div class="stat-box">
+              <div class="stat-value">120+</div>
+              <p class="stat-desc">Progetti consegnati con successo in Italia e in Europa</p>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value">8</div>
+              <p class="stat-desc">Anni di esperienza verticale nel digitale e nel branding</p>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value">94%</div>
+              <p class="stat-desc">Clienti che rinnovano la collaborazione su nuovi progetti</p>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value">3×</div>
+              <p class="stat-desc">Incremento medio delle conversioni nei primi 6 mesi post-lancio</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. PROCESSO — COME LAVORIAMO (#2F1505) -->
+      <section class="section-dark" style="position: relative; overflow: hidden;">
+        <div class="section-watermark-outline" style="right: 20px; bottom: 10px;" aria-hidden="true">
+          PROCESSO
+        </div>
+        <div class="container">
+          <div class="section-header-row">
+            <div>
+              <span class="eyebrow">Processo</span>
+              <h2 class="section-title">Come Lavoriamo</h2>
+            </div>
+            <a href="metodo.html" class="section-link">Approfondisci il metodo →</a>
+          </div>
+
+          <div class="servizi-process-grid">
+            <div class="servizi-process-col">
+              <div class="servizi-process-roman">I</div>
+              <h3 class="servizi-process-title">Ascolto</h3>
+              <p class="servizi-process-desc">
+                Interviste agli stakeholder, audit dell’ecosistema attuale e definizione dei KPI.
+              </p>
+            </div>
+            <div class="servizi-process-col">
+              <div class="servizi-process-roman">II</div>
+              <h3 class="servizi-process-title">Strategia</h3>
+              <p class="servizi-process-desc">
+                Architettura dell’informazione, posizionamento competitivo e piano di rilascio.
+              </p>
+            </div>
+            <div class="servizi-process-col">
+              <div class="servizi-process-roman">III</div>
+              <h3 class="servizi-process-title">Creazione</h3>
+              <p class="servizi-process-desc">
+                Art direction, UI/UX design system e sviluppo full-stack ad alte prestazioni.
+              </p>
+            </div>
+            <div class="servizi-process-col">
+              <div class="servizi-process-roman">IV</div>
+              <h3 class="servizi-process-title">Lancio</h3>
+              <p class="servizi-process-desc">
+                Quality assurance, messa in produzione su infrastruttura cloud e ottimizzazione.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="site-footer-mount"></div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/moving-gradient.js"></script>
+    <script src="/js/components.js"></script>
+    <script src="/js/pages.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        window.EvigComponents.initSharedLayout('servizi');
+        window.EvigPages.initServiziPage();
+      });
+    </script>
+  </body>
+</html>

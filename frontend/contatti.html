@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contatti — EvigDog Studio</title>
+    <meta
+      name="description"
+      content="Parliamo del tuo prossimo progetto digitale. Contatta EvigDog Studio a Milano per una consulenza strategica o un preventivo su misura."
+    />
+    <link rel="stylesheet" href="/css/variables.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <link rel="stylesheet" href="/css/pages.css" />
+  </head>
+  <body>
+    <div id="site-header-mount"></div>
+
+    <main>
+      <!-- 1. HERO INTRO PARLIAMO (FORM DI CONTATTO.css) -->
+      <section class="hero-intro-parliamo">
+        <div class="container contatti-top-strip">
+          <span class="contatti-top-brand">EVIGDOG STUDIO</span>
+        </div>
+
+        <div class="container parliamo-center-box">
+          <span class="eyebrow" style="color: #A8592B; margin-bottom: 18px;">
+            <span class="eyebrow-dot"></span>DISPONIBILI ORA
+          </span>
+          <span
+            style="font-size: 11px; letter-spacing: 3.3px; text-transform: uppercase; color: rgba(237, 205, 145, 0.45);"
+          >
+            CONTATTI
+          </span>
+          <h1 class="parliamo-huge">Parliamo<span class="text-terracotta">.</span></h1>
+          <p style="font-size: 17px; line-height: 28.9px; color: rgba(255, 255, 255, 0.6); max-width: 480px;">
+            Raccontaci la tua idea, i tuoi obiettivi o la sfida che vuoi affrontare. Ti rispondiamo
+            entro 24 ore lavorative.
+          </p>
+          <a href="#contact-form-section" class="btn-parliamo-wide">INVIA IL MESSAGGIO</a>
+        </div>
+
+        <div class="parliamo-bg-watermark" aria-hidden="true">PARLIAMO</div>
+      </section>
+
+      <!-- 2. HERO CONTACT SPLIT SECTION (#3D1C08) -->
+      <section class="contact-split-section" id="contact-form-section">
+        <div class="container">
+          <div class="contact-split-topbar">
+            <span
+              style="font-size: 11px; font-weight: 600; letter-spacing: 3.3px; text-transform: uppercase; color: rgba(237, 205, 145, 0.5);"
+            >
+              CONTATTI
+            </span>
+            <span class="eyebrow" style="margin-bottom: 0; color: #A8592B;">
+              <span class="eyebrow-dot"></span>Disponibili ora
+            </span>
+          </div>
+
+          <div class="contact-split-grid">
+            <!-- Left Column: Info & Socials -->
+            <div>
+              <h2 class="contact-left-title">Parliamo</h2>
+              <p style="font-size: 15px; line-height: 25.5px; color: rgba(255, 255, 255, 0.6); max-width: 400px;">
+                Ogni grande progetto inizia con una conversazione. Compila il form oppure scrivici
+                direttamente.
+              </p>
+
+              <div class="contact-info-table">
+                <div class="contact-info-row">
+                  <span class="footer-contact-label" style="margin: 0;">EMAIL</span>
+                  <a href="mailto:hello@evigdogstudio.com" style="color: #FFFFFF; font-size: 14px;">
+                    hello@evigdogstudio.com
+                  </a>
+                </div>
+                <div class="contact-info-row">
+                  <span class="footer-contact-label" style="margin: 0;">TELEFONO</span>
+                  <a href="tel:+390212345678" style="color: #FFFFFF; font-size: 14px;">
+                    +39 02 1234 5678
+                  </a>
+                </div>
+                <div class="contact-info-row">
+                  <span class="footer-contact-label" style="margin: 0;">SEDE</span>
+                  <span style="color: #FFFFFF; font-size: 14px;">Via Tortona 37 · Milano</span>
+                </div>
+                <div class="contact-info-row">
+                  <span class="footer-contact-label" style="margin: 0;">ORARI</span>
+                  <span style="color: #FFFFFF; font-size: 14px;">Lun–Ven · 09:00–18:30</span>
+                </div>
+              </div>
+
+              <div class="contact-socials-square">
+                <a href="https://instagram.com" target="_blank" rel="noreferrer" class="social-sq-btn">
+                  IG
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="social-sq-btn">
+                  LI
+                </a>
+                <a href="https://behance.net" target="_blank" rel="noreferrer" class="social-sq-btn">
+                  BE
+                </a>
+              </div>
+            </div>
+
+            <!-- Right Column: Interactive Form (Bottom-border inputs as in Figma) -->
+            <div class="contact-form-box">
+              <form id="main-contact-form">
+                <div class="form-grid-2">
+                  <div class="form-field">
+                    <label for="contact-name" class="form-label">Nome *</label>
+                    <input
+                      type="text"
+                      id="contact-name"
+                      name="name"
+                      class="form-input"
+                      placeholder="Il tuo nome e cognome"
+                      required
+                    />
+                  </div>
+                  <div class="form-field">
+                    <label for="contact-email" class="form-label">Email *</label>
+                    <input
+                      type="email"
+                      id="contact-email"
+                      name="email"
+                      class="form-input"
+                      placeholder="nome@azienda.it"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-grid-2">
+                  <div class="form-field">
+                    <label for="contact-project-type" class="form-label">Tipo di Progetto</label>
+                    <select id="contact-project-type" name="projectType" class="form-select">
+                      <option value="Brand Identity">Brand Identity</option>
+                      <option value="Web Design & Dev">Web Design &amp; Dev</option>
+                      <option value="UI/UX Design">UI/UX Design</option>
+                      <option value="Motion & 3D">Motion &amp; 3D</option>
+                      <option value="Strategia & Marketing">Strategia &amp; Marketing</option>
+                      <option value="Fotografia & Video">Fotografia &amp; Video</option>
+                      <option value="Altro">Altro / Consulenza Completa</option>
+                    </select>
+                  </div>
+                  <div class="form-field">
+                    <label for="contact-budget" class="form-label">Budget Indicativo</label>
+                    <select id="contact-budget" name="budget" class="form-select">
+                      <option value="< 5.000 €">&lt; 5.000 €</option>
+                      <option value="5.000 € – 15.000 €" selected>5.000 € – 15.000 €</option>
+                      <option value="15.000 € – 30.000 €">15.000 € – 30.000 €</option>
+                      <option value="> 30.000 €">&gt; 30.000 €</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label for="contact-message" class="form-label">Messaggio *</label>
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    class="form-textarea"
+                    placeholder="Raccontaci obiettivi, tempistiche e contesto del progetto..."
+                    required
+                  ></textarea>
+                </div>
+
+                <div class="form-submit-row">
+                  <button type="submit" id="contact-submit-btn" class="btn btn-primary">
+                    INVIA IL MESSAGGIO
+                  </button>
+                  <span style="font-size: 12px; color: rgba(255, 255, 255, 0.5);">
+                    Risposta garantita entro 24 ore
+                  </span>
+                </div>
+
+                <div id="contact-form-feedback" class="form-feedback" role="status"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. FAQ SECTION (#2F1505, Stacked Header, No Numbers) -->
+      <section class="faq-section">
+        <div class="container">
+          <div style="margin-bottom: 40px;">
+            <span class="eyebrow">FAQ</span>
+            <h2 class="section-title">Domande Frequenti</h2>
+          </div>
+          <div class="faq-list" id="faq-list-mount" data-show-numbers="false"></div>
+        </div>
+      </section>
+    </main>
+
+    <div id="site-footer-mount"></div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/moving-gradient.js"></script>
+    <script src="/js/components.js"></script>
+    <script src="/js/pages.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        window.EvigComponents.initSharedLayout('contatti');
+        window.EvigPages.initContactPage();
+      });
+    </script>
+  </body>
+</html>

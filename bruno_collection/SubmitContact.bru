@@ -1,0 +1,22 @@
+meta {
+  name: SubmitContact
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/api/contacts
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Mario Rossi",
+    "email": "mario.rossi@unicam.it",
+    "projectType": "Web Design & Dev",
+    "budget": "10.000€ – 25.000€",
+    "message": "Richiesta inviata tramite Bruno API Client per il test dell'esame AWMC."
+  }
+}
+

@@ -1,0 +1,950 @@
+/* HeroIntro */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 20px;
+gap: 20px;
+
+position: relative;
+width: 1589px;
+height: 1614.55px;
+left: 1892px;
+top: 477px;
+
+border: 1px dashed #8A38F5;
+border-radius: 5px;
+
+
+/* Property 1=Default */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 96px 48px;
+gap: 35px;
+isolation: isolate;
+
+width: 1547px;
+height: 895px;
+
+background: #2F1505;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px 48px;
+gap: 1px;
+
+width: 1451px;
+height: 17px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+z-index: 0;
+
+
+/* EVIGDOG STUDIO */
+
+width: 130px;
+height: 15px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 10px;
+line-height: 15px;
+/* identical to box height, or 150% */
+letter-spacing: 3.5px;
+text-transform: uppercase;
+
+color: rgba(255, 255, 255, 0.4);
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Container */
+
+width: 1355px;
+height: 1px;
+
+background: rgba(237, 205, 145, 0.4);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px 32px;
+
+width: 671px;
+height: 460px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: flex-start;
+padding: 0px 0px 40px;
+gap: 8px;
+
+width: 607px;
+height: 58px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Text:transform */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+isolation: isolate;
+
+width: 7px;
+height: 7px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Text */
+
+position: absolute;
+width: 6.35px;
+height: 6.35px;
+left: 0.32px;
+top: 0.32px;
+
+background: #A8592B;
+opacity: 0.58;
+border-radius: 3.04472e+07px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+z-index: 0;
+
+
+/* Text */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px;
+
+width: 143px;
+height: 18px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Disponibili ora */
+
+width: 143px;
+height: 18px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 18px;
+/* identical to box height, or 150% */
+text-align: center;
+letter-spacing: 3.36px;
+text-transform: uppercase;
+
+color: #A8592B;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Paragraph:margin */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px 0px 16px;
+
+width: 607px;
+height: 34px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Contatti */
+
+width: 87px;
+height: 18px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 18px;
+/* identical to box height, or 150% */
+text-align: center;
+letter-spacing: 4.2px;
+text-transform: uppercase;
+
+color: rgba(237, 205, 145, 0.4);
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Heading 1 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px 0px 28px;
+
+width: 607px;
+height: 180px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Parliamo. */
+
+width: 607px;
+height: 152px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 152px;
+line-height: 152px;
+/* identical to box height, or 100% */
+text-align: center;
+letter-spacing: -3px;
+
+color: #F5ECD7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Paragraph:margin */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px 0px 48px;
+
+width: 607px;
+height: 140px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Hai un progetto in mente? Raccontacelo. Siamo pron */
+
+width: 500px;
+height: 92px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 31px;
+/* or 170% */
+text-align: center;
+
+color: rgba(255, 255, 255, 0.45);
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Buttons */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 16px 24px;
+
+width: 607px;
+height: 48px;
+
+background: #EDCD91;
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* INVIA IL MESSAGGIO */
+
+width: 559px;
+height: 16px;
+
+/* FONT WEB/UI Button
+
+Esclusivo per i bottoni e i link di navigazione.
+*/
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 100%;
+/* identical to box height, or 16px */
+text-align: center;
+
+color: #2F1505;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* PARLIAMO */
+
+position: absolute;
+height: 280px;
+left: 135.5px;
+right: 133.5px;
+bottom: 34px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 280px;
+line-height: 280px;
+/* identical to box height, or 100% */
+letter-spacing: -8px;
+
+color: #EDCD91;
+
+opacity: 0.04;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+z-index: 2;
+
+
+/* Property 1=Mobile */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 96px 32px;
+gap: 35px;
+
+width: 360px;
+height: 657.55px;
+
+background: #2F1505;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Loghi Azienda */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px;
+gap: 5px;
+
+width: 219.16px;
+height: 62.55px;
+
+opacity: 0.25;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 7 */
+
+width: 219.16px;
+height: 41.05px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector */
+
+position: absolute;
+left: 0%;
+right: 89.09%;
+top: 1.14%;
+bottom: 37.3%;
+
+background: #EDCD91;
+
+
+/* Vector */
+
+position: absolute;
+left: 12.71%;
+right: 73.05%;
+top: 1.14%;
+bottom: 37.3%;
+
+background: #EDCD91;
+
+
+/* Vector */
+
+position: absolute;
+left: 29.57%;
+right: 68.33%;
+top: 1.14%;
+bottom: 37.31%;
+
+background: #EDCD91;
+
+
+/* Vector */
+
+position: absolute;
+left: 55.21%;
+right: 30.73%;
+top: 2.83%;
+bottom: 35.62%;
+
+background: #EDCD91;
+
+
+/* Vector */
+
+position: absolute;
+left: 72.12%;
+right: 14.15%;
+top: 1.6%;
+bottom: 34.37%;
+
+background: #EDCD91;
+
+
+/* Vector */
+
+position: absolute;
+left: 33.98%;
+right: 53.47%;
+top: 0%;
+bottom: 36.08%;
+
+background: #EDCD91;
+
+
+/* Vector */
+
+position: absolute;
+left: 87.45%;
+right: 0%;
+top: 1.69%;
+bottom: 34.39%;
+
+background: #EDCD91;
+
+
+/* STUDIO */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 219px;
+height: 16.5px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Vector */
+
+width: 7.75px;
+height: 16.12px;
+
+background: #EDCD91;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector */
+
+width: 6.86px;
+height: 15.96px;
+
+background: #EDCD91;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Vector */
+
+width: 7.8px;
+height: 16.28px;
+
+background: #EDCD91;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Vector */
+
+width: 7.86px;
+height: 15.96px;
+
+background: #EDCD91;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Vector */
+
+width: 1.32px;
+height: 15.96px;
+
+background: #EDCD91;
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 0;
+
+
+/* Vector */
+
+width: 7.83px;
+height: 16.5px;
+
+background: #EDCD91;
+
+/* Inside auto layout */
+flex: none;
+order: 5;
+flex-grow: 0;
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px 16px;
+
+width: 296px;
+height: 368px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: flex-start;
+padding: 0px 0px 40px;
+gap: 8px;
+
+width: 264px;
+height: 58px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Text:transform */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+isolation: isolate;
+
+width: 7px;
+height: 7px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Text */
+
+position: absolute;
+width: 6.35px;
+height: 6.35px;
+left: 0.32px;
+top: 0.32px;
+
+background: #A8592B;
+opacity: 0.58;
+border-radius: 3.04472e+07px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+z-index: 0;
+
+
+/* Text */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px;
+
+width: 143px;
+height: 18px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Disponibili ora */
+
+width: 143px;
+height: 18px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 18px;
+/* identical to box height, or 150% */
+text-align: center;
+letter-spacing: 3.36px;
+text-transform: uppercase;
+
+color: #A8592B;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Paragraph:margin */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px 0px 16px;
+
+width: 264px;
+height: 34px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Contatti */
+
+width: 87px;
+height: 18px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 18px;
+/* identical to box height, or 150% */
+text-align: center;
+letter-spacing: 4.2px;
+text-transform: uppercase;
+
+color: rgba(237, 205, 145, 0.4);
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Heading 1 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px 0px 28px;
+
+width: 264px;
+height: 84px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Parliamo. */
+
+width: 244px;
+height: 56px;
+
+/* FONT WEB/Header 1
+
+Esclusivo per la Value Proposition hero.
+*/
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 56px;
+line-height: 100%;
+/* identical to box height, or 56px */
+text-align: center;
+letter-spacing: -0.02em;
+
+color: #F5ECD7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Paragraph:margin */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px 0px 48px;
+
+width: 264px;
+height: 144px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Hai un progetto in mente? Raccontacelo. Siamo pron */
+
+width: 264px;
+height: 96px;
+
+/* FONT WEB/Body/Base
+
+Per i paragrafi standard.
+*/
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 150%;
+/* or 24px */
+text-align: center;
+
+color: rgba(255, 255, 255, 0.45);
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Buttons */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 16px 24px;
+
+width: 264px;
+height: 48px;
+
+background: #EDCD91;
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* INVIA IL MESSAGGIO */
+
+width: 216px;
+height: 16px;
+
+/* FONT WEB/UI Button
+
+Esclusivo per i bottoni e i link di navigazione.
+*/
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 100%;
+/* identical to box height, or 16px */
+text-align: center;
+
+color: #2F1505;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;

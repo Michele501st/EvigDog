@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio — EvigDog Studio</title>
+    <meta
+      name="description"
+      content="Esplora i progetti selezionati e i casi studio di EvigDog Studio: Brand Identity, Web Design, UI/UX, Motion & 3D e Fotografia."
+    />
+    <link rel="stylesheet" href="/css/variables.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <link rel="stylesheet" href="/css/pages.css" />
+  </head>
+  <body>
+    <div id="site-header-mount"></div>
+
+    <main>
+      <!-- 1. SPLIT HERO WITH 2x3 PHOTO MOSAIC (PORTFOLIO.css) -->
+      <section class="split-hero">
+        <div class="split-hero-left">
+          <div>
+            <span class="split-hero-eyebrow">LAVORI SELEZIONATI</span>
+            <h1 class="split-hero-title">
+              Ogni progetto<br />
+              è una storia<br />
+              <span class="text-terracotta">unica.</span>
+            </h1>
+            <p class="split-hero-desc">
+              Una selezione di identità visive, piattaforme web e campagne digitali progettate per
+              generare valore misurabile e duraturo.
+            </p>
+          </div>
+
+          <img
+            src="/assets/images/logo-horizontal-gold.svg"
+            alt=""
+            class="split-hero-watermark-logo"
+            aria-hidden="true"
+          />
+
+          <div class="split-hero-stats">
+            <div>
+              <div class="hero-stat-num">120+</div>
+              <div class="hero-stat-label">Progetti</div>
+            </div>
+            <div>
+              <div class="hero-stat-num">94%</div>
+              <div class="hero-stat-label">Clienti Ricorrenti</div>
+            </div>
+            <div>
+              <div class="hero-stat-num">18</div>
+              <div class="hero-stat-label">Premi &amp; Menzioni</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="split-hero-right" style="padding: 0;">
+          <div class="portfolio-hero-mosaic">
+            <div class="portfolio-mosaic-item">
+              <img src="/assets/images/portfolio-1.jpg" alt="Aura Cosmetics" />
+            </div>
+            <div class="portfolio-mosaic-item">
+              <img src="/assets/images/portfolio-2.jpg" alt="Kova Architecture" />
+            </div>
+            <div class="portfolio-mosaic-item">
+              <img src="/assets/images/portfolio-3.jpg" alt="Nexo Finance" />
+            </div>
+            <div class="portfolio-mosaic-item">
+              <img src="/assets/images/portfolio-4.jpg" alt="Vesper Watch" />
+            </div>
+            <div class="portfolio-mosaic-item">
+              <img src="/assets/images/portfolio-5.jpg" alt="Forma Living" />
+            </div>
+            <div class="portfolio-mosaic-item">
+              <img src="/assets/images/portfolio-6.jpg" alt="Luxe Café" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. MARQUEE STRIP -->
+      <div class="marquee-mount"></div>
+
+      <!-- 3. TUTTI I PROGETTI + FILTER BAR (#3D1C08) -->
+      <section class="section-brown">
+        <div class="container">
+          <div class="section-header-row" style="margin-bottom: 28px;">
+            <div>
+              <span class="eyebrow">Portfolio</span>
+              <h2 class="section-title">Tutti i Progetti</h2>
+            </div>
+            <span style="font-size: 13px; color: rgba(255, 255, 255, 0.6);">
+              6 progetti selezionati · 2024–2025
+            </span>
+          </div>
+
+          <div class="filter-bar" role="tablist" aria-label="Filtra progetti per categoria">
+            <button type="button" class="filter-btn active" data-filter="Tutti">Tutti</button>
+            <button type="button" class="filter-btn" data-filter="Brand Identity">
+              Brand Identity
+            </button>
+            <button type="button" class="filter-btn" data-filter="Web Design">Web Design</button>
+            <button type="button" class="filter-btn" data-filter="UI/UX Design">
+              UI/UX Design
+            </button>
+            <button type="button" class="filter-btn" data-filter="Motion & 3D">Motion &amp; 3D</button>
+            <button type="button" class="filter-btn" data-filter="Fotografia">Fotografia</button>
+          </div>
+
+          <div class="projects-grid" id="portfolio-projects-grid">
+            <!-- Populated dynamically via /api/projects -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. PULL QUOTE (#2F1505 with Giant Left & Right Quote Marks) -->
+      <section class="pull-quote-section">
+        <div class="container">
+          <div class="pull-quote-row">
+            <span class="pull-quote-mark" aria-hidden="true">“</span>
+            <p class="pull-quote-text">
+              Non progettiamo per stupire i colleghi.<br />
+              Progettiamo per far <span class="text-gold">crescere</span> chi ci sceglie.
+            </p>
+            <span class="pull-quote-mark" aria-hidden="true">”</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. PROGETTO IN EVIDENZA (#3D1C08) -->
+      <section class="section-brown">
+        <div class="container">
+          <div class="section-header-row">
+            <div>
+              <span class="eyebrow">Focus</span>
+              <h2 class="section-title">Progetto in Evidenza</h2>
+            </div>
+          </div>
+          <div id="featured-project-mount"></div>
+        </div>
+      </section>
+
+      <!-- 6. COSA DICONO DI NOI (Background #EDCD91 Light Gold!) -->
+      <section class="section-gold">
+        <div class="container">
+          <div class="section-header-row">
+            <div>
+              <span class="eyebrow">Testimonianze</span>
+              <h2 class="section-title">Cosa Dicono di Noi</h2>
+            </div>
+          </div>
+
+          <div class="testimonials-grid">
+            <article class="testimonial-card">
+              <p class="testimonial-quote">
+                “EvigDog Studio ha saputo tradurre la nostra visione in un’identità di marca solida
+                e riconoscibile. A tre mesi dal lancio l’e-commerce ha raddoppiato il tasso di
+                conversione.”
+              </p>
+              <div class="testimonial-footer">
+                <div>
+                  <strong class="testimonial-author">Camilla Rizzo</strong>
+                  <span class="testimonial-role">CEO · Aura Cosmetics</span>
+                </div>
+                <span class="testimonial-year">2025</span>
+              </div>
+            </article>
+
+            <article class="testimonial-card">
+              <p class="testimonial-quote">
+                “Rigore progettuale, rispetto assoluto delle tempistiche e una sensibilità estetica
+                rara. Il nuovo portale riflette finalmente il livello dei nostri progetti
+                architettonici.”
+              </p>
+              <div class="testimonial-footer">
+                <div>
+                  <strong class="testimonial-author">Andrea Kova</strong>
+                  <span class="testimonial-role">Founder · Kova Architecture</span>
+                </div>
+                <span class="testimonial-year">2025</span>
+              </div>
+            </article>
+
+            <article class="testimonial-card">
+              <p class="testimonial-quote">
+                “Il redesign della nostra dashboard fintech ha ridotto i ticket di supporto del 40%
+                e reso l’onboarding immediato. Un vero partner strategico prima ancora che
+                creativo.”
+              </p>
+              <div class="testimonial-footer">
+                <div>
+                  <strong class="testimonial-author">Federico Galli</strong>
+                  <span class="testimonial-role">CPO · Nexo Finance</span>
+                </div>
+                <span class="testimonial-year">2024</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. INTERMEDIATE CTA BAND ("LAVORIAMO" on #3D1C08) -->
+      <section class="intermediate-cta-band">
+        <div class="section-watermark" style="right: 20px; bottom: -20px;" aria-hidden="true">
+          LAVORIAMO
+        </div>
+        <div class="container intermediate-cta-row">
+          <div>
+            <span class="eyebrow">Hai un Progetto in Mente?</span>
+            <h2 class="section-title">Iniziamo a costruirlo insieme.</h2>
+          </div>
+          <a href="contatti.html" class="btn btn-primary">INVIA IL MESSAGGIO</a>
+        </div>
+      </section>
+    </main>
+
+    <div id="site-footer-mount"></div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/moving-gradient.js"></script>
+    <script src="/js/components.js"></script>
+    <script src="/js/pages.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        window.EvigComponents.initSharedLayout('portfolio');
+        window.EvigPages.initPortfolioPage();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Admin — EvigDog Studio</title>
+  <meta name="description" content="Pannello di amministrazione per gestire i messaggi del form di contatto, la newsletter e lo stato Cloud del sito." />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+  <div id="site-header-mount"></div>
+
+  <main class="admin-section">
+    <div class="container">
+      <div class="section-header-row">
+        <div>
+          <span class="eyebrow"><span class="eyebrow-dot"></span>Area Riservata · Backoffice Cloud</span>
+          <h1 class="section-title">Dashboard Admin</h1>
+          <p id="container-host-info" style="font-size: 13px; color: var(--accent-gold); margin-top: 8px;">
+            Verifica stato container in corso...
+          </p>
+        </div>
+
+        <form id="admin-auth-form" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <input
+            type="password"
+            id="admin-code-input"
+            class="footer-input"
+            style="width: 210px; padding: 10px 14px; font-size: 14px;"
+            placeholder="Codice Admin"
+            aria-label="Codice di accesso Admin"
+          />
+          <button type="submit" class="btn btn-primary btn-sm">Autentica</button>
+          <span id="admin-auth-status" style="font-size: 12px; font-weight: 600;"></span>
+        </form>
+      </div>
+
+      <!-- KPI Overview Cards -->
+      <div class="admin-top-cards">
+        <div class="admin-stat-card">
+          <span class="admin-stat-label">Messaggi Form Totali</span>
+          <span class="admin-stat-value" id="stat-total-msg">0</span>
+        </div>
+        <div class="admin-stat-card">
+          <span class="admin-stat-label">Messaggi da Leggere (Nuovi)</span>
+          <span class="admin-stat-value" id="stat-new-msg" style="color: var(--accent-gold);">0</span>
+        </div>
+        <div class="admin-stat-card">
+          <span class="admin-stat-label">Lead Email Footer</span>
+          <span class="admin-stat-value" id="stat-newsletter">0</span>
+        </div>
+        <div class="admin-stat-card">
+          <span class="admin-stat-label">Engine Database Attivo</span>
+          <span class="admin-stat-value" id="stat-db-mode" style="font-size: 19px; margin-top: 6px;">-</span>
+        </div>
+      </div>
+
+      <!-- Maintenance Mode Control Panel -->
+      <div class="admin-panel" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+        <div>
+          <span class="admin-stat-label">Controllo Operativo Sito (Manutenzione)</span>
+          <div style="display: flex; align-items: center; gap: 14px; margin-top: 8px;">
+            <strong style="font-size: 20px; color: var(--text-cream);">Stato Attuale:</strong>
+            <span id="maint-status-badge" class="status-badge status-completato">ONLINE</span>
+          </div>
+          <p style="font-size: 13px; color: var(--text-muted-light); margin-top: 6px;">
+            Attivando la modalità manutenzione, le pagine pubbliche reindirizzano automaticamente alla schermata <code>manutenzione.html</code>.
+          </p>
+        </div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="manutenzione.html" target="_blank" class="btn btn-outline btn-sm">Anteprima Pagina Manutenzione</a>
+          <button type="button" class="btn btn-terracotta btn-sm" id="toggle-maintenance-btn">
+            Attiva Modalità Manutenzione
+          </button>
+        </div>
+      </div>
+
+      <!-- Contact Form Submissions Panel -->
+      <div class="admin-panel">
+        <div class="admin-toolbar">
+          <div>
+            <h2 style="font-size: 24px; font-weight: 700; color: var(--text-cream);">
+              Richieste dal Form di Contatto
+            </h2>
+            <p style="font-size: 14px; color: var(--text-muted-light);">
+              Gestisci i messaggi inviati dagli utenti su <code>contatti.html</code> (modifica stato o elimina).
+            </p>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+            <label for="admin-status-filter" class="form-label">Filtra Stato:</label>
+            <select
+              id="admin-status-filter"
+              class="form-select"
+              style="width: 180px; border: 1px solid var(--border-gold-medium); padding: 8px 12px;"
+            >
+              <option value="tutti">Tutti gli stati</option>
+              <option value="nuovo">Nuovo</option>
+              <option value="in_lavorazione">In Lavorazione</option>
+              <option value="completato">Completato</option>
+            </select>
+            <button type="button" class="btn btn-outline btn-sm" id="admin-refresh-btn">
+              Aggiorna Lista ↻
+            </button>
+          </div>
+        </div>
+
+        <div class="admin-messages-list" id="admin-messages-list">
+          <!-- Popolato dinamicamente da /api/contacts -->
+        </div>
+      </div>
+
+      <!-- Footer Newsletter Leads Panel -->
+      <div class="admin-panel">
+        <div class="admin-toolbar" style="margin-bottom: 12px;">
+          <div>
+            <h2 style="font-size: 22px; font-weight: 700; color: var(--text-cream);">
+              Email Registrate dal Footer ("Invia la tua Email")
+            </h2>
+            <p style="font-size: 14px; color: var(--text-muted-light);">
+              Contatti rapidi raccolti dal form presente nel footer di tutte le pagine.
+            </p>
+          </div>
+        </div>
+
+        <div id="admin-newsletter-list">
+          <!-- Popolato dinamicamente da /api/newsletter -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer-mount"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/admin.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      window.EvigComponents.initSharedLayout('admin');
+      window.EvigAdmin.initAdminDashboard();
+    });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,1029 @@
+/* Bottoni Strategia - Hero */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 100px;
+gap: 10px;
+
+position: relative;
+width: 1479px;
+height: 1566px;
+left: 7827px;
+top: 189px;
+
+background: #737373;
+
+
+/* Container */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 20px;
+
+width: 1279px;
+height: 334px;
+
+border: 1px dashed #8A38F5;
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Property 1=Default */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 48px 24px;
+gap: 22px;
+isolation: isolate;
+
+width: 355.75px;
+height: 292px;
+
+border-right: 2px solid rgba(237, 205, 145, 0.33);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* I */
+
+width: 305.75px;
+height: 44px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 44px;
+line-height: 44px;
+/* identical to box height, or 100% */
+
+color: #EDCD91;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+z-index: 0;
+
+
+/* Scoperta */
+
+width: 305.75px;
+height: 33px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 22px;
+line-height: 33px;
+/* identical to box height, or 150% */
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Analizziamo il tuo brand, il mercato e i tuoi obie */
+
+width: 305.75px;
+height: 75px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 25px;
+/* or 165% */
+
+color: rgba(255, 255, 255, 0.55);
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+z-index: 2;
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+position: absolute;
+width: 112px;
+height: 110px;
+left: 169.77px;
+top: 174px;
+
+opacity: 0.02;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+z-index: 3;
+
+
+/* Property 1=Variant2 */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 48px 24px;
+gap: 22px;
+isolation: isolate;
+
+width: 355.75px;
+height: 292px;
+
+background: #A8592B;
+border-right: 2px solid rgba(237, 205, 145, 0.33);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* I */
+
+width: 305.75px;
+height: 44px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 44px;
+line-height: 44px;
+/* identical to box height, or 100% */
+
+color: #EDCD91;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+z-index: 0;
+
+
+/* Scoperta */
+
+width: 305.75px;
+height: 33px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 22px;
+line-height: 33px;
+/* identical to box height, or 150% */
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Analizziamo il tuo brand, il mercato e i tuoi obie */
+
+width: 305.75px;
+height: 75px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 25px;
+/* or 165% */
+
+color: rgba(255, 255, 255, 0.55);
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+z-index: 2;
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+position: absolute;
+width: 112px;
+height: 110px;
+left: 169.77px;
+top: 174px;
+
+opacity: 0.02;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+z-index: 3;
+
+
+/* Container */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 20px;
+
+width: 1279px;
+height: 334px;
+
+border: 1px dashed #8A38F5;
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Property 1=Default */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 48px 24px;
+gap: 22px;
+isolation: isolate;
+
+width: 355.75px;
+height: 292px;
+
+border-right: 2px solid rgba(237, 205, 145, 0.33);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* II */
+
+width: 305.75px;
+height: 44px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 44px;
+line-height: 44px;
+/* identical to box height, or 100% */
+
+color: #EDCD91;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+z-index: 0;
+
+
+/* Strategia */
+
+width: 305.75px;
+height: 33px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 22px;
+line-height: 33px;
+/* identical to box height, or 150% */
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Definiamo la direzione creativa, l'architettura de */
+
+width: 305.75px;
+height: 75px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 25px;
+/* or 165% */
+
+color: rgba(255, 255, 255, 0.55);
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+z-index: 2;
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+position: absolute;
+width: 135px;
+height: 110px;
+left: 146.78px;
+top: 174px;
+
+opacity: 0.02;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+z-index: 3;
+
+
+/* Property 1=Variant2 */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 48px 24px;
+gap: 22px;
+isolation: isolate;
+
+width: 355.75px;
+height: 292px;
+
+background: #A8592B;
+border-right: 2px solid rgba(237, 205, 145, 0.33);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* II */
+
+width: 305.75px;
+height: 44px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 44px;
+line-height: 44px;
+/* identical to box height, or 100% */
+
+color: #EDCD91;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+z-index: 0;
+
+
+/* Strategia */
+
+width: 305.75px;
+height: 33px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 22px;
+line-height: 33px;
+/* identical to box height, or 150% */
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Definiamo la direzione creativa, l'architettura de */
+
+width: 305.75px;
+height: 75px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 25px;
+/* or 165% */
+
+color: rgba(255, 255, 255, 0.55);
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+z-index: 2;
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+position: absolute;
+width: 135px;
+height: 110px;
+left: 146.78px;
+top: 174px;
+
+opacity: 0.02;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+z-index: 3;
+
+
+/* Container */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 20px;
+
+width: 1279px;
+height: 334px;
+
+border: 1px dashed #8A38F5;
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Property 1=Default */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 48px 24px;
+gap: 22px;
+isolation: isolate;
+
+width: 355.75px;
+height: 292px;
+
+border-right: 2px solid rgba(237, 205, 145, 0.33);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* III */
+
+width: 305.75px;
+height: 44px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 44px;
+line-height: 44px;
+/* identical to box height, or 100% */
+
+color: #EDCD91;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+z-index: 0;
+
+
+/* Progettazione */
+
+width: 305.75px;
+height: 33px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 22px;
+line-height: 33px;
+/* identical to box height, or 150% */
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Realizziamo i concept, iteriamo con te e affiniamo */
+
+width: 305.75px;
+height: 75px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 25px;
+/* or 165% */
+
+color: rgba(255, 255, 255, 0.55);
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+z-index: 2;
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+position: absolute;
+width: 139px;
+height: 110px;
+left: 143.47px;
+top: 174px;
+
+opacity: 0.02;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+z-index: 3;
+
+
+/* Property 1=Variant2 */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 48px 24px;
+gap: 22px;
+isolation: isolate;
+
+width: 355.75px;
+height: 292px;
+
+background: #A8592B;
+border-right: 2px solid rgba(237, 205, 145, 0.33);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* III */
+
+width: 305.75px;
+height: 44px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 44px;
+line-height: 44px;
+/* identical to box height, or 100% */
+
+color: #EDCD91;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+z-index: 0;
+
+
+/* Progettazione */
+
+width: 305.75px;
+height: 33px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 22px;
+line-height: 33px;
+/* identical to box height, or 150% */
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Realizziamo i concept, iteriamo con te e affiniamo */
+
+width: 305.75px;
+height: 75px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 25px;
+/* or 165% */
+
+color: rgba(255, 255, 255, 0.55);
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+z-index: 2;
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+position: absolute;
+width: 139px;
+height: 110px;
+left: 143.47px;
+top: 174px;
+
+opacity: 0.02;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+z-index: 3;
+
+
+/* Container */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 20px;
+
+width: 1272px;
+height: 334px;
+
+border: 1px dashed #8A38F5;
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Property 1=Default */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 48px 24px;
+gap: 22px;
+isolation: isolate;
+
+width: 353.75px;
+height: 292px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* IV */
+
+width: 305.75px;
+height: 44px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 44px;
+line-height: 44px;
+/* identical to box height, or 100% */
+
+color: #EDCD91;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+z-index: 0;
+
+
+/* Consegna */
+
+width: 305.75px;
+height: 33px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 22px;
+line-height: 33px;
+/* identical to box height, or 150% */
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Rilasciamo il prodotto finale con supporto tecnico */
+
+width: 305.75px;
+height: 75px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 25px;
+/* or 165% */
+
+color: rgba(255, 255, 255, 0.55);
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+z-index: 2;
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+position: absolute;
+width: 145px;
+height: 110px;
+left: 138.3px;
+top: 174px;
+
+opacity: 0.02;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+z-index: 3;
+
+
+/* Property 1=Variant2 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 48px 24px;
+gap: 22px;
+isolation: isolate;
+
+width: 353.75px;
+height: 292px;
+
+background: #A8592B;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* IV */
+
+width: 305.75px;
+height: 44px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 44px;
+line-height: 44px;
+/* identical to box height, or 100% */
+
+color: #EDCD91;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+z-index: 0;
+
+
+/* Consegna */
+
+width: 305.75px;
+height: 33px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 22px;
+line-height: 33px;
+/* identical to box height, or 150% */
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Rilasciamo il prodotto finale con supporto tecnico */
+
+width: 305.75px;
+height: 75px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 25px;
+/* or 165% */
+
+color: rgba(255, 255, 255, 0.55);
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+z-index: 2;
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+position: absolute;
+width: 145px;
+height: 110px;
+left: 138.3px;
+top: 174px;
+
+opacity: 0.02;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+z-index: 3;

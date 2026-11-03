@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team — EvigDog Studio</title>
+    <meta
+      name="description"
+      content="Incontra i professionisti di EvigDog Studio: direttori creativi, designer, ingegneri full-stack e strategist."
+    />
+    <link rel="stylesheet" href="/css/variables.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <link rel="stylesheet" href="/css/pages.css" />
+  </head>
+  <body>
+    <div id="site-header-mount"></div>
+
+    <main>
+      <!-- 1. TEAM INTERACTIVE HERO CAROUSEL (SERVIZI, PORTFOLIO & TEAM.css) -->
+      <section class="team-hero-slider">
+        <div class="team-hero-bg-photo" aria-hidden="true">
+          <img id="slide-member-img" src="/assets/images/team-1.jpg" alt="Marco Ferretti" />
+          <div class="team-hero-bg-overlay"></div>
+        </div>
+
+        <div class="container team-hero-inner">
+          <div class="team-slider-topbar">
+            <span class="eyebrow" style="margin-bottom: 0;">Il Nostro Team</span>
+            <div class="team-dots" id="team-slider-dots" role="tablist" aria-label="Seleziona membro del team">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <div class="team-slide-main">
+            <div class="team-role-line">
+              <span class="team-role-label" id="slide-member-role">Creative Director</span>
+              <span class="team-role-sep"></span>
+              <span class="team-role-since" id="slide-member-since">Dal 2018</span>
+            </div>
+
+            <h1 class="team-slide-name" id="slide-member-name">Marco Ferretti</h1>
+
+            <p class="team-slide-quote" id="slide-member-quote">
+              “La creatività senza strategia è arte. Con la strategia, diventa business.”
+            </p>
+
+            <div class="team-slide-controls">
+              <button type="button" class="team-arrow-btn" id="team-prev-btn" aria-label="Precedente">
+                ←
+              </button>
+              <button type="button" class="team-arrow-btn next" id="team-next-btn" aria-label="Successivo">
+                →
+              </button>
+              <span
+                id="slide-member-counter"
+                style="font-size: 12px; font-weight: 600; letter-spacing: 2px; color: rgba(237, 205, 145, 0.5); margin-left: 8px;"
+              >
+                01 / 05
+              </span>
+            </div>
+          </div>
+
+          <!-- 5-Thumbnail Strip at Bottom-Left -->
+          <div class="team-thumbs-strip" id="team-thumbs-strip" aria-label="Miniature del team">
+            <!-- Populated dynamically via /api/team -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. MARQUEE STRIP -->
+      <div class="marquee-mount"></div>
+
+      <!-- 3. LE PERSONE DIETRO IL BRAND (#3D1C08) -->
+      <section class="section-brown">
+        <div class="container">
+          <div class="section-header-row">
+            <div>
+              <span class="eyebrow">Struttura</span>
+              <h2 class="section-title">Le Persone Dietro il Brand</h2>
+            </div>
+            <span style="font-size: 13px; color: rgba(255, 255, 255, 0.6);">
+              5 professionisti · Milano
+            </span>
+          </div>
+
+          <div class="team-directory-list" id="team-directory-mount">
+            <!-- Populated dynamically from /api/team -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. COME PENSIAMO (#2F1505) -->
+      <section class="section-dark">
+        <div class="container">
+          <div class="section-header-row">
+            <div>
+              <span class="eyebrow">Filosofia</span>
+              <h2 class="section-title">Come Pensiamo</h2>
+            </div>
+          </div>
+
+          <div class="come-pensiamo-grid">
+            <div>
+              <span class="come-pensiamo-num">01</span>
+              <h3 class="come-pensiamo-title">Ascolto Attivo</h3>
+              <p class="come-pensiamo-desc">
+                Prima di proporre soluzioni, facciamo le domande giuste per comprendere a fondo il
+                contesto competitivo.
+              </p>
+            </div>
+            <div>
+              <span class="come-pensiamo-num">02</span>
+              <h3 class="come-pensiamo-title">Essenzialità</h3>
+              <p class="come-pensiamo-desc">
+                Togliamo il superfluo finché non resta solo ciò che comunica con forza, chiarezza e
+                memorabilità.
+              </p>
+            </div>
+            <div>
+              <span class="come-pensiamo-num">03</span>
+              <h3 class="come-pensiamo-title">Contaminazione</h3>
+              <p class="come-pensiamo-desc">
+                Designer, strategist e sviluppatori lavorano fianco a fianco fin dal primo giorno di
+                progetto.
+              </p>
+            </div>
+            <div>
+              <span class="come-pensiamo-num">04</span>
+              <h3 class="come-pensiamo-title">Responsabilità</h3>
+              <p class="come-pensiamo-desc">
+                Misuriamo il successo del nostro lavoro attraverso i risultati concreti ottenuti dai
+                nostri clienti.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="site-footer-mount"></div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/moving-gradient.js"></script>
+    <script src="/js/components.js"></script>
+    <script src="/js/pages.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        window.EvigComponents.initSharedLayout('team');
+        window.EvigPages.initTeamPage();
+      });
+    </script>
+  </body>
+</html>

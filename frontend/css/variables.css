@@ -1,0 +1,138 @@
+/**
+ * @file variables.css
+ * @description Global Design Tokens extracted from the EvigDog Studio Figma CSS exports.
+ * Includes color palette, typography scale (DM Sans), spacing, and responsive breakpoints.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,200..800;1,9..40,300..600&display=swap');
+
+:root {
+  /* Color Palette - EvigDog Studio Figma */
+  --bg-darkest: #2F1505;
+  --bg-brown: #3D1C08;
+  --bg-card-dark: #361806;
+  --bg-gold: #EDCD91;
+  --bg-taupe: #6D5346;
+  --bg-light: #F5ECD7;
+  --bg-white: #FFFFFF;
+
+  --accent-gold: #EDCD91;
+  --accent-gold-strong: #C9A84C;
+  --accent-gold-soft: #C8A96E;
+  --accent-gold-bright: #FAB32D;
+  --accent-terracotta: #A8592B;
+  --accent-taupe: #6D5346;
+
+  --text-cream: #F5ECD7;
+  --text-beige: #C4B49A;
+  --text-white: #FFFFFF;
+  --text-dark: #2F1505;
+  --text-brown: #3D1C08;
+  --text-muted-light: rgba(245, 236, 215, 0.58);
+  --text-muted-white: rgba(255, 255, 255, 0.6);
+
+  --border-gold-subtle: rgba(237, 205, 145, 0.14);
+  --border-gold-medium: rgba(237, 205, 145, 0.25);
+  --border-gold-strong: rgba(237, 205, 145, 0.45);
+  --border-dark-subtle: rgba(47, 21, 5, 0.15);
+
+  /* Typography */
+  --font-main: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Layout & Spacing */
+  --max-width: 1440px;
+  --content-width: 1320px;
+  --section-pad-y: 96px;
+  --section-pad-x: 64px;
+  --header-height: 70.75px;
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.2s ease;
+  --transition-med: 0.35s var(--ease-out);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-darkest);
+  color: var(--text-cream);
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast), opacity var(--transition-fast);
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 var(--section-pad-x);
+}
+
+.text-terracotta {
+  color: var(--accent-terracotta);
+}
+
+.text-gold {
+  color: var(--accent-gold);
+}
+
+.text-gold-strong {
+  color: var(--accent-gold-strong);
+}
+
+.text-gold-soft {
+  color: var(--accent-gold-soft);
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --section-pad-y: 72px;
+    --section-pad-x: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-pad-y: 56px;
+    --section-pad-x: 20px;
+    --header-height: 62px;
+  }
+}

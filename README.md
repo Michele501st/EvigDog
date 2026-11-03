@@ -1,2 +1,0 @@
-# EvigDog
-University project

@@ -4,135 +4,326 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard Admin — EvigDog Studio</title>
-  <meta name="description" content="Pannello di amministrazione per gestire i messaggi del form di contatto, la newsletter e lo stato Cloud del sito." />
+  <meta name="description" content="Pannello di amministrazione per gestire i messaggi del form di contatto, la newsletter, utenti e lo stato Cloud del sito." />
   <link rel="stylesheet" href="css/variables.css" />
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/pages.css" />
 </head>
 <body>
-  <div id="site-header-mount"></div>
 
   <main class="admin-section">
     <div class="container">
-      <div class="section-header-row">
-        <div>
-          <span class="eyebrow"><span class="eyebrow-dot"></span>Area Riservata · Backoffice Cloud</span>
-          <h1 class="section-title">Dashboard Admin</h1>
-          <p id="container-host-info" style="font-size: 13px; color: var(--accent-gold); margin-top: 8px;">
-            Verifica stato container in corso...
+
+      <!-- ========================================== -->
+      <!-- 1. VISTA LOGIN (Se non autenticato)        -->
+      <!-- ========================================== -->
+      <div id="admin-login-view" class="admin-login-wrap" style="display: none;">
+        <div style="text-align: center; margin-bottom: 24px;">
+          </span>Area Riservata</span>
+          <h1 class="admin-login-title" style="margin-top: 10px;">Accesso Amministratore</h1>
+          <p class="admin-login-subtitle">
+            Inserisci le tue credenziali per accedere al pannello di gestione di EvigDog Studio.
           </p>
         </div>
 
-        <form id="admin-auth-form" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-          <input
-            type="password"
-            id="admin-code-input"
-            class="footer-input"
-            style="width: 210px; padding: 10px 14px; font-size: 14px;"
-            placeholder="Codice Admin"
-            aria-label="Codice di accesso Admin"
-          />
-          <button type="submit" class="btn btn-primary btn-sm">Autentica</button>
-          <span id="admin-auth-status" style="font-size: 12px; font-weight: 600;"></span>
+        <div id="login-error-alert" class="admin-login-error"></div>
+
+        <form id="admin-login-form">
+          <div class="admin-form-group">
+            <label for="login-username">Nome Utente (Username)</label>
+            <input
+              type="text"
+              id="login-username"
+              class="admin-input"
+              placeholder="Es. admin"
+              required
+              autocomplete="username"
+            />
+          </div>
+
+          <div class="admin-form-group">
+            <label for="login-password">Password</label>
+            <input
+              type="password"
+              id="login-password"
+              class="admin-input"
+              placeholder="••••••••"
+              required
+              autocomplete="current-password"
+            />
+          </div>
+
+          <button type="submit" class="btn-admin-submit" id="btn-login-submit">
+            Accedi alla Dashboard
+          </button>
         </form>
       </div>
 
-      <!-- KPI Overview Cards -->
-      <div class="admin-top-cards">
-        <div class="admin-stat-card">
-          <span class="admin-stat-label">Messaggi Form Totali</span>
-          <span class="admin-stat-value" id="stat-total-msg">0</span>
-        </div>
-        <div class="admin-stat-card">
-          <span class="admin-stat-label">Messaggi da Leggere (Nuovi)</span>
-          <span class="admin-stat-value" id="stat-new-msg" style="color: var(--accent-gold);">0</span>
-        </div>
-        <div class="admin-stat-card">
-          <span class="admin-stat-label">Lead Email Footer</span>
-          <span class="admin-stat-value" id="stat-newsletter">0</span>
-        </div>
-        <div class="admin-stat-card">
-          <span class="admin-stat-label">Engine Database Attivo</span>
-          <span class="admin-stat-value" id="stat-db-mode" style="font-size: 19px; margin-top: 6px;">-</span>
-        </div>
-      </div>
-
-      <!-- Maintenance Mode Control Panel -->
-      <div class="admin-panel" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
-        <div>
-          <span class="admin-stat-label">Controllo Operativo Sito (Manutenzione)</span>
-          <div style="display: flex; align-items: center; gap: 14px; margin-top: 8px;">
-            <strong style="font-size: 20px; color: var(--text-cream);">Stato Attuale:</strong>
-            <span id="maint-status-badge" class="status-badge status-completato">ONLINE</span>
-          </div>
-          <p style="font-size: 13px; color: var(--text-muted-light); margin-top: 6px;">
-            Attivando la modalità manutenzione, le pagine pubbliche reindirizzano automaticamente alla schermata <code>manutenzione.html</code>.
-          </p>
-        </div>
-        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-          <a href="manutenzione.html" target="_blank" class="btn btn-outline btn-sm">Anteprima Pagina Manutenzione</a>
-          <button type="button" class="btn btn-terracotta btn-sm" id="toggle-maintenance-btn">
-            Attiva Modalità Manutenzione
-          </button>
-        </div>
-      </div>
-
-      <!-- Contact Form Submissions Panel -->
-      <div class="admin-panel">
-        <div class="admin-toolbar">
+      <!-- ========================================== -->
+      <!-- 2. VISTA DASHBOARD (Se autenticato)        -->
+      <!-- ========================================== -->
+      <div id="admin-dashboard-view" style="display: none;">
+        <div class="section-header-row" style="margin-bottom: 32px;">
           <div>
-            <h2 style="font-size: 24px; font-weight: 700; color: var(--text-cream);">
-              Richieste dal Form di Contatto
-            </h2>
-            <p style="font-size: 14px; color: var(--text-muted-light);">
-              Gestisci i messaggi inviati dagli utenti su <code>contatti.html</code> (modifica stato o elimina).
+            </span>Area Riservata · Backoffice Cloud</span>
+            <h1 class="section-title">Dashboard Admin</h1>
+            <p id="container-host-info" style="font-size: 13px; color: var(--accent-gold); margin-top: 8px;">
+              Verifica stato container in corso...
             </p>
           </div>
 
-          <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-            <label for="admin-status-filter" class="form-label">Filtra Stato:</label>
-            <select
-              id="admin-status-filter"
-              class="form-select"
-              style="width: 180px; border: 1px solid var(--border-gold-medium); padding: 8px 12px;"
-            >
-              <option value="tutti">Tutti gli stati</option>
-              <option value="nuovo">Nuovo</option>
-              <option value="in_lavorazione">In Lavorazione</option>
-              <option value="completato">Completato</option>
-            </select>
-            <button type="button" class="btn btn-outline btn-sm" id="admin-refresh-btn">
-              Aggiorna Lista ↻
+          <!-- Barra utente e comandi profilo/logout -->
+          <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+            <div class="admin-user-pill">
+              <span style="font-size: 13px; color: var(--text-cream);">
+                Utente: <strong id="admin-current-username">admin</strong>
+              </span>
+              <span id="admin-current-role-badge" class="role-badge-superadmin">SUPERADMIN</span>
+            </div>
+
+            <button type="button" class="btn btn-outline btn-sm" id="btn-open-profile">
+              Profilo & Password ⚙
+            </button>
+
+            <button type="button" class="btn btn-terracotta btn-sm" id="btn-admin-logout">
+              Disconnetti ✕
             </button>
           </div>
         </div>
 
-        <div class="admin-messages-list" id="admin-messages-list">
-          <!-- Popolato dinamicamente da /api/contacts -->
-        </div>
-      </div>
-
-      <!-- Footer Newsletter Leads Panel -->
-      <div class="admin-panel">
-        <div class="admin-toolbar" style="margin-bottom: 12px;">
-          <div>
-            <h2 style="font-size: 22px; font-weight: 700; color: var(--text-cream);">
-              Email Registrate dal Footer ("Invia la tua Email")
-            </h2>
-            <p style="font-size: 14px; color: var(--text-muted-light);">
-              Contatti rapidi raccolti dal form presente nel footer di tutte le pagine.
-            </p>
+        <!-- KPI Overview Cards -->
+        <div class="admin-top-cards">
+          <div class="admin-stat-card">
+            <span class="admin-stat-label">Messaggi Form Totali</span>
+            <span class="admin-stat-value" id="stat-total-msg">0</span>
+          </div>
+          <div class="admin-stat-card">
+            <span class="admin-stat-label">Messaggi da Leggere (Nuovi)</span>
+            <span class="admin-stat-value" id="stat-new-msg" style="color: var(--accent-gold);">0</span>
+          </div>
+          <div class="admin-stat-card">
+            <span class="admin-stat-label">Lead Email Footer</span>
+            <span class="admin-stat-value" id="stat-newsletter">0</span>
+          </div>
+          <div class="admin-stat-card">
+            <span class="admin-stat-label">Engine Database Attivo</span>
+            <span class="admin-stat-value" id="stat-db-mode" style="font-size: 19px; margin-top: 6px;">-</span>
           </div>
         </div>
 
-        <div id="admin-newsletter-list">
-          <!-- Popolato dinamicamente da /api/newsletter -->
+        <!-- SuperAdmin RBAC Panel (Visibile SOLO a utenti con ruolo 'superadmin') -->
+        <div class="admin-panel" id="superadmin-users-panel" style="display: none;">
+          <div class="admin-toolbar" style="margin-bottom: 16px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <h2 style="font-size: 22px; font-weight: 700; color: var(--text-cream);">
+                  Gestione Amministratori & Accessi
+                </h2>
+                <span class="role-badge-superadmin">Esclusivo SuperAdmin</span>
+              </div>
+              <p style="font-size: 14px; color: var(--text-muted-light); margin-top: 4px;">
+                Abilita nuovi membri del team alla gestione della dashboard o revoca gli accessi esistenti.
+              </p>
+            </div>
+          </div>
+
+          <div id="users-alert-box" class="admin-login-error" style="margin-bottom: 16px;"></div>
+
+          <!-- Tabella utenti registrati -->
+          <div style="overflow-x: auto;">
+            <table class="admin-users-table">
+              <thead>
+                <tr>
+                  <th>Nome Utente</th>
+                  <th>Ruolo</th>
+                  <th>Data Creazione</th>
+                  <th style="text-align: right;">Azioni</th>
+                </tr>
+              </thead>
+              <tbody id="admin-users-tbody">
+                <!-- Popolato dinamicamente da EvigApi.getUsers() -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Form di aggiunta nuovo utente -->
+          <form id="create-user-form" class="admin-create-user-form">
+            <div>
+              <label class="form-label" for="new-user-username" style="font-size: 11px;">Nuovo Username</label>
+              <input
+                type="text"
+                id="new-user-username"
+                class="admin-input"
+                placeholder="Es. michele_admin"
+                required
+              />
+            </div>
+            <div>
+              <label class="form-label" for="new-user-password" style="font-size: 11px;">Password Iniziale (min. 6 caratteri)</label>
+              <input
+                type="password"
+                id="new-user-password"
+                class="admin-input"
+                placeholder="••••••••"
+                required
+                minlength="6"
+              />
+            </div>
+            <div>
+              <label class="form-label" for="new-user-role" style="font-size: 11px;">Ruolo Assegnato</label>
+              <select id="new-user-role" class="form-select" style="padding: 11px 12px; border: 1px solid var(--border-gold-medium);">
+                <option value="admin">Admin</option>
+                <option value="superadmin">SuperAdmin</option>
+              </select>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary btn-sm" style="width: 100%; padding: 12px 18px;">
+                + Aggiungi Utente
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Maintenance Mode Control Panel -->
+        <div class="admin-panel" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+          <div>
+            <h2 style="font-size: 24px; font-weight: 700; color: var(--text-cream);">Manutenzione Sito</h2>
+            <div style="display: flex; align-items: center; gap: 14px; margin-top: 8px;">
+              <strong style="font-size: 18px; color: var(--text-cream);">Stato:</strong>
+              <span id="maint-status-badge" class="status-badge status-completato">ONLINE</span>
+            </div>
+            <p style="font-size: 13px; color: var(--text-muted-light); margin-top: 6px;">
+              Attivando la modalità manutenzione, tutte le pagine pubbliche reindirizzano automaticamente a <code>manutenzione.html</code>.
+            </p>
+          </div>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a href="manutenzione.html" target="_blank" class="btn btn-outline btn-sm">Anteprima Pagina Manutenzione</a>
+            <button type="button" class="btn btn-terracotta btn-sm" id="toggle-maintenance-btn">
+              Attiva Modalità Manutenzione
+            </button>
+          </div>
+        </div>
+
+        <!-- Contact Form Submissions Panel -->
+        <div class="admin-panel">
+          <div class="admin-toolbar">
+            <div>
+              <h2 style="font-size: 24px; font-weight: 700; color: var(--text-cream);">
+                Richieste dal Form di Contatto
+              </h2>
+              <p style="font-size: 14px; color: var(--text-muted-light);">
+                Gestisci i messaggi inviati dagli utenti su <code>contatti.html</code> (modifica stato o elimina).
+              </p>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+              <label for="admin-status-filter" class="form-label">Filtra Stato:</label>
+              <select
+                id="admin-status-filter"
+                class="form-select"
+                style="width: 180px; border: 1px solid var(--border-gold-medium); padding: 8px 12px;"
+              >
+                <option value="tutti">Tutti gli stati</option>
+                <option value="nuovo">Nuovo</option>
+                <option value="in_lavorazione">In Lavorazione</option>
+                <option value="completato">Completato</option>
+              </select>
+              <button type="button" class="btn btn-outline btn-sm" id="admin-refresh-btn">
+                Aggiorna Lista ↻
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-messages-list" id="admin-messages-list">
+            <!-- Popolato dinamicamente da /api/contacts -->
+          </div>
         </div>
       </div>
+
     </div>
   </main>
 
-  <div id="site-footer-mount"></div>
+  <!-- ========================================== -->
+  <!-- 3. MODALE PROFILO (Username & Password)    -->
+  <!-- ========================================== -->
+  <div id="admin-profile-modal" class="admin-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="profile-modal-title">
+    <div class="admin-modal">
+      <div class="admin-modal-header">
+        <h3 id="profile-modal-title" class="admin-modal-title">Gestione Profilo & Credenziali</h3>
+        <button type="button" class="admin-modal-close" id="btn-close-profile-modal" aria-label="Chiudi finestra">✕</button>
+      </div>
+
+      <div id="profile-status-alert" class="admin-login-error"></div>
+
+      <form id="admin-profile-form">
+        <div class="admin-form-group">
+          <label for="profile-username">Nome Utente (Username)</label>
+          <input
+            type="text"
+            id="profile-username"
+            class="admin-input"
+            required
+            minlength="3"
+            placeholder="Il tuo username"
+          />
+          <small style="display: block; font-size: 11px; color: var(--text-muted-light); margin-top: 4px;">
+            Puoi modificare liberamente il tuo username dopo il primo accesso.
+          </small>
+        </div>
+
+        <div style="margin: 20px 0 16px; padding-top: 16px; border-top: 1px solid var(--border-gold-subtle);">
+          <strong style="display: block; font-size: 13px; color: var(--accent-gold); margin-bottom: 6px;">
+            Cambio Password (Opzionale)
+          </strong>
+          <small style="display: block; font-size: 11px; color: var(--text-muted-light); margin-bottom: 14px;">
+            Lascia vuoti i campi password se desideri aggiornare solamente lo username.
+          </small>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="profile-current-password">Password Attuale</label>
+          <input
+            type="password"
+            id="profile-current-password"
+            class="admin-input"
+            placeholder="Necessaria per confermare la nuova password"
+            autocomplete="current-password"
+          />
+        </div>
+
+        <div class="admin-form-group">
+          <label for="profile-new-password">Nuova Password (min. 6 caratteri)</label>
+          <input
+            type="password"
+            id="profile-new-password"
+            class="admin-input"
+            placeholder="••••••••"
+            minlength="6"
+            autocomplete="new-password"
+          />
+        </div>
+
+        <div class="admin-form-group">
+          <label for="profile-confirm-password">Conferma Nuova Password</label>
+          <input
+            type="password"
+            id="profile-confirm-password"
+            class="admin-input"
+            placeholder="••••••••"
+            minlength="6"
+            autocomplete="new-password"
+          />
+        </div>
+
+        <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+          <button type="button" class="btn btn-outline btn-sm" id="btn-cancel-profile">Annulla</button>
+          <button type="submit" class="btn btn-primary btn-sm" id="btn-save-profile">Salva Modifiche</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  
 
   <script src="js/api.js"></script>
   <script src="js/components.js"></script>
@@ -145,4 +336,3 @@
   </script>
 </body>
 </html>
-

@@ -1,16 +1,15 @@
 /**
  * @file admin.js
  * @description Controller for the EvigDog Studio Admin Dashboard (`admin.html`).
- * Allows checking Cloud container health, toggling Maintenance Mode in real time,
- * and viewing, filtering, updating status, or deleting Contact Form & Newsletter submissions.
+ * Handles RBAC authentication (SuperAdmin / Admin), profile credential updates,
+ * user provisioning (exclusive to SuperAdmin), real-time maintenance toggle,
+ * and contact / newsletter submissions moderation.
  */
 
-const STORAGE_KEY = 'evigdog_admin_code';
-
 /**
- * Escapes HTML special characters to prevent XSS when rendering user-submitted messages.
- * @param {string} str - Raw string.
- * @returns {string} Safe HTML string.
+ * Escapes HTML special characters to prevent XSS.
+ * @param {string} str - Raw input string.
+ * @returns {string} Sanitized string.
  */
 function escapeHtml(str) {
   return String(str ?? '')
@@ -22,9 +21,9 @@ function escapeHtml(str) {
 }
 
 /**
- * Formats an ISO timestamp into a readable Italian date/time string.
+ * Formats an ISO timestamp into a readable Italian date/time representation.
  * @param {string} iso - ISO date string.
- * @returns {string} Formatted date string.
+ * @returns {string} Human-friendly formatted date.
  */
 function formatDate(iso) {
   if (!iso) return '-';
@@ -42,35 +41,146 @@ function formatDate(iso) {
 }
 
 /**
- * Initializes the Admin Dashboard UI and event listeners.
+ * Displays an error or success message in a designated alert container.
+ * @param {HTMLElement} element - Alert container element.
+ * @param {string} message - Text to display.
+ * @param {'error'|'success'} [type='error'] - Message kind.
+ */
+function showAlert(element, message, type = 'error') {
+  if (!element) return;
+  if (!message) {
+    element.style.display = 'none';
+    element.textContent = '';
+    return;
+  }
+  element.style.display = 'block';
+  element.textContent = message;
+  if (type === 'success') {
+    element.style.background = 'rgba(72, 187, 120, 0.15)';
+    element.style.borderColor = '#48bb78';
+    element.style.color = '#9ae6b4';
+  } else {
+    element.style.background = 'rgba(245, 101, 101, 0.15)';
+    element.style.borderColor = '#f56565';
+    element.style.color = '#feb2b2';
+  }
+}
+
+/**
+ * Initializes the Admin Dashboard UI, authentication flow, and operational listeners.
  */
 function initAdminDashboard() {
-  const authForm = document.getElementById('admin-auth-form');
-  const codeInput = document.getElementById('admin-code-input');
-  const authStatus = document.getElementById('admin-auth-status');
-  const statusFilter = document.getElementById('admin-status-filter');
-  const refreshBtn = document.getElementById('admin-refresh-btn');
-  const toggleMaintBtn = document.getElementById('toggle-maintenance-btn');
+  // Views
+  const loginView = document.getElementById('admin-login-view');
+  const dashboardView = document.getElementById('admin-dashboard-view');
 
+  // Login View Elements
+  const loginForm = document.getElementById('admin-login-form');
+  const loginUsernameInput = document.getElementById('login-username');
+  const loginPasswordInput = document.getElementById('login-password');
+  const loginErrorAlert = document.getElementById('login-error-alert');
+  const loginSubmitBtn = document.getElementById('btn-login-submit');
+
+  // Topbar & Profile Elements
+  const currentUsernameEl = document.getElementById('admin-current-username');
+  const currentRoleBadgeEl = document.getElementById('admin-current-role-badge');
+  const btnOpenProfile = document.getElementById('btn-open-profile');
+  const btnAdminLogout = document.getElementById('btn-admin-logout');
+
+  // Profile Modal Elements
+  const profileModal = document.getElementById('admin-profile-modal');
+  const btnCloseProfileModal = document.getElementById('btn-close-profile-modal');
+  const btnCancelProfile = document.getElementById('btn-cancel-profile');
+  const profileForm = document.getElementById('admin-profile-form');
+  const profileUsernameInput = document.getElementById('profile-username');
+  const profileCurrentPasswordInput = document.getElementById('profile-current-password');
+  const profileNewPasswordInput = document.getElementById('profile-new-password');
+  const profileConfirmPasswordInput = document.getElementById('profile-confirm-password');
+  const profileStatusAlert = document.getElementById('profile-status-alert');
+
+  // SuperAdmin User Management Elements
+  const superadminUsersPanel = document.getElementById('superadmin-users-panel');
+  const adminUsersTbody = document.getElementById('admin-users-tbody');
+  const createUserForm = document.getElementById('create-user-form');
+  const newUsernameInput = document.getElementById('new-user-username');
+  const newPasswordInput = document.getElementById('new-user-password');
+  const newRoleSelect = document.getElementById('new-user-role');
+  const usersAlertBox = document.getElementById('users-alert-box');
+
+  // Operational Dashboard Elements
   const statTotalMsg = document.getElementById('stat-total-msg');
   const statNewMsg = document.getElementById('stat-new-msg');
   const statNewsletter = document.getElementById('stat-newsletter');
   const statDbMode = document.getElementById('stat-db-mode');
   const containerHostEl = document.getElementById('container-host-info');
   const maintBadge = document.getElementById('maint-status-badge');
+  const toggleMaintBtn = document.getElementById('toggle-maintenance-btn');
 
+  const statusFilter = document.getElementById('admin-status-filter');
+  const refreshBtn = document.getElementById('admin-refresh-btn');
   const messagesListEl = document.getElementById('admin-messages-list');
   const newsletterListEl = document.getElementById('admin-newsletter-list');
 
-  let currentAdminCode = sessionStorage.getItem(STORAGE_KEY) || 'evigdog-admin-2026';
+  let currentUser = null;
   let currentMaintenanceMode = false;
 
-  if (codeInput) {
-    codeInput.value = currentAdminCode;
+  /**
+   * Switches the UI between unauthenticated Login screen and authenticated Dashboard.
+   * @param {boolean} isAuthenticated - Whether a valid session exists.
+   */
+  function setAuthenticatedState(isAuthenticated) {
+    if (isAuthenticated) {
+      if (loginView) loginView.style.display = 'none';
+      if (dashboardView) dashboardView.style.display = 'block';
+    } else {
+      currentUser = null;
+      if (dashboardView) dashboardView.style.display = 'none';
+      if (loginView) loginView.style.display = 'block';
+      if (loginPasswordInput) loginPasswordInput.value = '';
+      showAlert(loginErrorAlert, '');
+    }
   }
 
   /**
-   * Loads container health, contact messages, and newsletter leads from the Backend.
+   * Validates active session and loads all required dashboard data.
+   */
+  async function checkSessionAndLoad() {
+    try {
+      const meResponse = await window.EvigApi.getMe();
+      if (meResponse && meResponse.user) {
+        currentUser = meResponse.user;
+        updateUserHeader(currentUser);
+        setAuthenticatedState(true);
+        await Promise.all([
+          loadDashboardData(),
+          currentUser.role === 'superadmin' ? loadUsersList() : Promise.resolve(),
+        ]);
+      } else {
+        setAuthenticatedState(false);
+      }
+    } catch (_err) {
+      setAuthenticatedState(false);
+    }
+  }
+
+  /**
+   * Updates topbar username display and SuperAdmin visibility.
+   * @param {{ id: string, username: string, role: string }} user - Logged user.
+   */
+  function updateUserHeader(user) {
+    if (currentUsernameEl) currentUsernameEl.textContent = user.username;
+    if (currentRoleBadgeEl) {
+      currentRoleBadgeEl.textContent = user.role.toUpperCase();
+      currentRoleBadgeEl.className =
+        user.role === 'superadmin' ? 'role-badge-superadmin' : 'role-badge-admin';
+    }
+    if (superadminUsersPanel) {
+      superadminUsersPanel.style.display = user.role === 'superadmin' ? 'block' : 'none';
+    }
+  }
+
+  /**
+   * Fetches container health, contacts, and newsletter leads.
    */
   async function loadDashboardData() {
     const selectedStatus = statusFilter ? statusFilter.value : 'tutti';
@@ -78,16 +188,12 @@ function initAdminDashboard() {
     try {
       const [health, contacts, leads] = await Promise.all([
         window.EvigApi.getHealth(),
-        window.EvigApi.getContacts(selectedStatus, currentAdminCode),
-        window.EvigApi.getNewsletterLeads(currentAdminCode),
+        window.EvigApi.getContacts(selectedStatus),
+        window.EvigApi.getNewsletterLeads(),
       ]);
 
-      if (authStatus) {
-        authStatus.textContent = 'Connesso e autenticato';
-        authStatus.style.color = '#9ae6b4';
-      }
-
       currentMaintenanceMode = Boolean(health.maintenanceMode);
+
       if (statDbMode) {
         statDbMode.textContent =
           health.database?.mode === 'mongodb' ? 'MongoDB 7 (Container)' : 'JSON Store (Locale)';
@@ -120,24 +226,21 @@ function initAdminDashboard() {
       renderContacts(contacts);
       renderNewsletter(leads);
     } catch (err) {
-      if (authStatus) {
-        authStatus.textContent = err.message || 'Codice Admin non valido.';
-        authStatus.style.color = '#feb2b2';
-      }
-      if (messagesListEl) {
-        messagesListEl.innerHTML = `<p style="color: #feb2b2;">${escapeHtml(err.message)}</p>`;
+      console.error('[Admin] Failed to load dashboard data:', err);
+      if (err.message && err.message.includes('401')) {
+        setAuthenticatedState(false);
       }
     }
   }
 
   /**
-   * Renders the list of Contact Form inquiries with status controls and delete button.
-   * @param {Array<object>} contacts - Array of contact messages.
+   * Renders the Contact Form inquiries table.
+   * @param {Array<object>} contacts - Submissions list.
    */
   function renderContacts(contacts) {
     if (!messagesListEl) return;
     if (!contacts.length) {
-      messagesListEl.innerHTML = `<p style="color: var(--text-muted-light);">Nessun messaggio presente per il filtro selezionato.</p>`;
+      messagesListEl.innerHTML = `<p style="color: var(--text-muted-light); padding: 16px 0;">Nessun messaggio presente per il filtro selezionato.</p>`;
       return;
     }
 
@@ -205,7 +308,7 @@ function initAdminDashboard() {
       sel.addEventListener('change', async () => {
         const id = sel.getAttribute('data-id');
         try {
-          await window.EvigApi.updateContactStatus(id, sel.value, currentAdminCode);
+          await window.EvigApi.updateContactStatus(id, sel.value);
           await loadDashboardData();
         } catch (err) {
           alert(err.message);
@@ -215,9 +318,10 @@ function initAdminDashboard() {
 
     messagesListEl.querySelectorAll('.msg-delete-btn').forEach((btn) => {
       btn.addEventListener('click', async () => {
+        if (!confirm('Sei sicuro di voler eliminare questa richiesta di contatto?')) return;
         const id = btn.getAttribute('data-id');
         try {
-          await window.EvigApi.deleteContact(id, currentAdminCode);
+          await window.EvigApi.deleteContact(id);
           await loadDashboardData();
         } catch (err) {
           alert(err.message);
@@ -227,13 +331,13 @@ function initAdminDashboard() {
   }
 
   /**
-   * Renders the list of Footer Newsletter / quick contact email leads.
-   * @param {Array<object>} leads - Array of email leads.
+   * Renders the footer newsletter leads list.
+   * @param {Array<object>} leads - Collected emails.
    */
   function renderNewsletter(leads) {
     if (!newsletterListEl) return;
     if (!leads.length) {
-      newsletterListEl.innerHTML = `<p style="color: var(--text-muted-light);">Nessuna email registrata dal Footer.</p>`;
+      newsletterListEl.innerHTML = `<p style="color: var(--text-muted-light); padding: 12px 0;">Nessuna email registrata dal Footer.</p>`;
       return;
     }
 
@@ -249,7 +353,7 @@ function initAdminDashboard() {
           </div>
           <button type="button" class="btn btn-outline btn-sm lead-delete-btn" data-id="${escapeHtml(
             lead.id
-          )}" style="padding: 6px 12px; font-size: 11px;">
+          )}" style="padding: 6px 12px; font-size: 11px; border-color: rgba(245, 101, 101, 0.45); color: #feb2b2;">
             Rimuovi
           </button>
         </div>
@@ -259,9 +363,10 @@ function initAdminDashboard() {
 
     newsletterListEl.querySelectorAll('.lead-delete-btn').forEach((btn) => {
       btn.addEventListener('click', async () => {
+        if (!confirm('Rimuovere questa email dai contatti newsletter?')) return;
         const id = btn.getAttribute('data-id');
         try {
-          await window.EvigApi.deleteNewsletterLead(id, currentAdminCode);
+          await window.EvigApi.deleteNewsletterLead(id);
           await loadDashboardData();
         } catch (err) {
           alert(err.message);
@@ -270,15 +375,226 @@ function initAdminDashboard() {
     });
   }
 
-  if (authForm && codeInput) {
-    authForm.addEventListener('submit', (e) => {
+  /**
+   * Loads and renders administrator accounts for SuperAdmin review.
+   */
+  async function loadUsersList() {
+    if (!adminUsersTbody) return;
+    try {
+      const response = await window.EvigApi.getUsers();
+      const users = response.users || [];
+
+      if (!users.length) {
+        adminUsersTbody.innerHTML = `<tr><td colspan="4" style="color: var(--text-muted-light);">Nessun utente trovato.</td></tr>`;
+        return;
+      }
+
+      adminUsersTbody.innerHTML = users
+        .map((u) => {
+          const isCurrent = currentUser && currentUser.id === u.id;
+          const roleBadgeClass =
+            u.role === 'superadmin' ? 'role-badge-superadmin' : 'role-badge-admin';
+
+          return `
+            <tr data-user-id="${escapeHtml(u.id)}">
+              <td>
+                <strong>${escapeHtml(u.username)}</strong>
+                ${isCurrent ? '<span style="font-size: 11px; color: var(--accent-gold); margin-left: 8px;">(Tu)</span>' : ''}
+              </td>
+              <td><span class="${roleBadgeClass}">${escapeHtml(u.role).toUpperCase()}</span></td>
+              <td style="color: var(--text-muted-light); font-size: 13px;">${formatDate(u.createdAt)}</td>
+              <td style="text-align: right;">
+                ${
+                  isCurrent
+                    ? '<span style="font-size: 12px; color: var(--text-muted-light);">In uso</span>'
+                    : `<button type="button" class="btn btn-outline btn-sm delete-user-btn" data-id="${escapeHtml(
+                        u.id
+                      )}" data-username="${escapeHtml(u.username)}" style="border-color: rgba(245, 101, 101, 0.45); color: #feb2b2; padding: 4px 10px; font-size: 11px;">
+                        Elimina
+                      </button>`
+                }
+              </td>
+            </tr>
+          `;
+        })
+        .join('');
+
+      adminUsersTbody.querySelectorAll('.delete-user-btn').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const id = btn.getAttribute('data-id');
+          const name = btn.getAttribute('data-username');
+          if (!confirm(`Sei sicuro di voler revocare e rimuovere l'account "${name}"?`)) return;
+
+          try {
+            await window.EvigApi.deleteUser(id);
+            showAlert(usersAlertBox, `Utente "${name}" eliminato con successo.`, 'success');
+            await loadUsersList();
+          } catch (err) {
+            showAlert(usersAlertBox, err.message, 'error');
+          }
+        });
+      });
+    } catch (err) {
+      console.error('[Admin] Failed to load users:', err);
+      showAlert(usersAlertBox, err.message, 'error');
+    }
+  }
+
+  // =========================================================================
+  // Event Listeners: Login Form
+  // =========================================================================
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      currentAdminCode = codeInput.value.trim();
-      sessionStorage.setItem(STORAGE_KEY, currentAdminCode);
-      loadDashboardData();
+      const username = loginUsernameInput.value.trim();
+      const password = loginPasswordInput.value;
+
+      if (!username || !password) {
+        showAlert(loginErrorAlert, 'Inserisci username e password.', 'error');
+        return;
+      }
+
+      try {
+        if (loginSubmitBtn) {
+          loginSubmitBtn.disabled = true;
+          loginSubmitBtn.textContent = 'Autenticazione in corso...';
+        }
+
+        const res = await window.EvigApi.login(username, password);
+        currentUser = res.user;
+        updateUserHeader(currentUser);
+        setAuthenticatedState(true);
+        await Promise.all([
+          loadDashboardData(),
+          currentUser.role === 'superadmin' ? loadUsersList() : Promise.resolve(),
+        ]);
+      } catch (err) {
+        showAlert(loginErrorAlert, err.message || 'Credenziali non valide.', 'error');
+      } finally {
+        if (loginSubmitBtn) {
+          loginSubmitBtn.disabled = false;
+          loginSubmitBtn.textContent = 'Accedi alla Dashboard';
+        }
+      }
     });
   }
 
+  // =========================================================================
+  // Event Listeners: Logout
+  // =========================================================================
+  if (btnAdminLogout) {
+    btnAdminLogout.addEventListener('click', async () => {
+      await window.EvigApi.logout();
+      setAuthenticatedState(false);
+    });
+  }
+
+  // =========================================================================
+  // Event Listeners: Profile Modal
+  // =========================================================================
+  function openProfileModal() {
+    if (!profileModal || !currentUser) return;
+    profileUsernameInput.value = currentUser.username;
+    profileCurrentPasswordInput.value = '';
+    profileNewPasswordInput.value = '';
+    profileConfirmPasswordInput.value = '';
+    showAlert(profileStatusAlert, '');
+    profileModal.classList.add('is-open');
+  }
+
+  function closeProfileModal() {
+    if (!profileModal) return;
+    profileModal.classList.remove('is-open');
+  }
+
+  if (btnOpenProfile) btnOpenProfile.addEventListener('click', openProfileModal);
+  if (btnCloseProfileModal) btnCloseProfileModal.addEventListener('click', closeProfileModal);
+  if (btnCancelProfile) btnCancelProfile.addEventListener('click', closeProfileModal);
+
+  if (profileForm) {
+    profileForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const newUsername = profileUsernameInput.value.trim();
+      const currentPassword = profileCurrentPasswordInput.value;
+      const newPassword = profileNewPasswordInput.value;
+      const confirmPassword = profileConfirmPasswordInput.value;
+
+      if (newPassword || confirmPassword) {
+        if (!currentPassword) {
+          showAlert(
+            profileStatusAlert,
+            'Inserisci la password attuale per autorizzare la nuova password.',
+            'error'
+          );
+          return;
+        }
+        if (newPassword !== confirmPassword) {
+          showAlert(
+            profileStatusAlert,
+            'La nuova password e la conferma non coincidono.',
+            'error'
+          );
+          return;
+        }
+        if (newPassword.length < 6) {
+          showAlert(
+            profileStatusAlert,
+            'La nuova password deve contenere almeno 6 caratteri.',
+            'error'
+          );
+          return;
+        }
+      }
+
+      try {
+        const payload = { newUsername };
+        if (newPassword) {
+          payload.currentPassword = currentPassword;
+          payload.newPassword = newPassword;
+        }
+
+        const res = await window.EvigApi.updateProfile(payload);
+        currentUser = res.user;
+        updateUserHeader(currentUser);
+        showAlert(profileStatusAlert, 'Profilo aggiornato con successo!', 'success');
+
+        setTimeout(() => {
+          closeProfileModal();
+          if (currentUser.role === 'superadmin') {
+            loadUsersList();
+          }
+        }, 900);
+      } catch (err) {
+        showAlert(profileStatusAlert, err.message, 'error');
+      }
+    });
+  }
+
+  // =========================================================================
+  // Event Listeners: SuperAdmin Create User
+  // =========================================================================
+  if (createUserForm) {
+    createUserForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = newUsernameInput.value.trim();
+      const password = newPasswordInput.value;
+      const role = newRoleSelect ? newRoleSelect.value : 'admin';
+
+      try {
+        await window.EvigApi.createUser({ username, password, role });
+        newUsernameInput.value = '';
+        newPasswordInput.value = '';
+        showAlert(usersAlertBox, `Nuovo ${role} "${username}" creato con successo!`, 'success');
+        await loadUsersList();
+      } catch (err) {
+        showAlert(usersAlertBox, err.message, 'error');
+      }
+    });
+  }
+
+  // =========================================================================
+  // Event Listeners: Operational Dashboard Controls
+  // =========================================================================
   if (statusFilter) {
     statusFilter.addEventListener('change', () => loadDashboardData());
   }
@@ -290,7 +606,7 @@ function initAdminDashboard() {
   if (toggleMaintBtn) {
     toggleMaintBtn.addEventListener('click', async () => {
       try {
-        await window.EvigApi.setMaintenanceStatus(!currentMaintenanceMode, currentAdminCode);
+        await window.EvigApi.setMaintenanceStatus(!currentMaintenanceMode);
         await loadDashboardData();
       } catch (err) {
         alert(err.message);
@@ -298,8 +614,8 @@ function initAdminDashboard() {
     });
   }
 
-  loadDashboardData();
+  // Esegui verifica iniziale della sessione
+  checkSessionAndLoad();
 }
 
 window.EvigAdmin = { initAdminDashboard };
-

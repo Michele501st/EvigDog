@@ -1,20 +1,53 @@
 /**
  * @file api.js
  * @description Modular API client for communicating with the EvigDog Studio Express Backend.
- * Supports both reverse-proxied Docker deployments (/api/*) and standalone local execution.
+ * Supports both reverse-proxied Docker deployments (/api/*), standalone local execution,
+ * and Bearer token session authentication with RBAC.
  */
 
 const API_BASE = '/api';
+const TOKEN_STORAGE_KEY = 'evigdog_session_token';
+
+/**
+ * Retrieves the currently active session token from sessionStorage.
+ * @returns {string|null}
+ */
+function getActiveToken() {
+  try {
+    return sessionStorage.getItem(TOKEN_STORAGE_KEY);
+  } catch (_e) {
+    return null;
+  }
+}
+
+/**
+ * Saves or clears the active session token in sessionStorage.
+ * @param {string|null} token
+ */
+function setActiveToken(token) {
+  try {
+    if (token) {
+      sessionStorage.setItem(TOKEN_STORAGE_KEY, token);
+    } else {
+      sessionStorage.removeItem(TOKEN_STORAGE_KEY);
+    }
+  } catch (_e) {
+    // Ignore storage errors in restrictive environments
+  }
+}
 
 /**
  * Performs an HTTP request against the Backend REST API and parses the JSON response.
+ * Automatically injects the active Bearer session token if present.
  * @param {string} endpoint - API path starting with `/` (e.g. `/projects`).
  * @param {RequestInit} [options={}] - Fetch options (method, headers, body).
  * @returns {Promise<any>} Parsed JSON payload.
  */
 async function apiRequest(endpoint, options = {}) {
+  const token = getActiveToken();
   const headers = {
     'Content-Type': 'application/json',
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...(options.headers || {}),
   };
 
@@ -31,14 +64,9 @@ async function apiRequest(endpoint, options = {}) {
 }
 
 window.EvigApi = {
+  // Public Data
   getHealth: () => apiRequest('/health'),
   getStatus: () => apiRequest('/status'),
-  setMaintenanceStatus: (maintenanceMode, adminCode) =>
-    apiRequest('/status', {
-      method: 'POST',
-      headers: { 'x-admin-code': adminCode },
-      body: JSON.stringify({ maintenanceMode }),
-    }),
   getProjects: (category) => {
     const query =
       category && category !== 'Tutti' ? `?category=${encodeURIComponent(category)}` : '';
@@ -52,36 +80,74 @@ window.EvigApi = {
       method: 'POST',
       body: JSON.stringify(payload),
     }),
-  getContacts: (status, adminCode) => {
-    const query = status && status !== 'tutti' ? `?status=${encodeURIComponent(status)}` : '';
-    return apiRequest(`/contacts${query}`, {
-      headers: { 'x-admin-code': adminCode },
-    });
-  },
-  updateContactStatus: (id, status, adminCode) =>
-    apiRequest(`/contacts/${encodeURIComponent(id)}`, {
-      method: 'PATCH',
-      headers: { 'x-admin-code': adminCode },
-      body: JSON.stringify({ status }),
-    }),
-  deleteContact: (id, adminCode) =>
-    apiRequest(`/contacts/${encodeURIComponent(id)}`, {
-      method: 'DELETE',
-      headers: { 'x-admin-code': adminCode },
-    }),
   submitNewsletter: (email, source = 'Footer CTA') =>
     apiRequest('/newsletter', {
       method: 'POST',
       body: JSON.stringify({ email, source }),
     }),
-  getNewsletterLeads: (adminCode) =>
-    apiRequest('/newsletter', {
-      headers: { 'x-admin-code': adminCode },
+
+  // Authentication & Session
+  getActiveToken,
+  setActiveToken,
+  login: async (username, password) => {
+    const res = await apiRequest('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ username, password }),
+    });
+    if (res.token) {
+      setActiveToken(res.token);
+    }
+    return res;
+  },
+  logout: async () => {
+    try {
+      await apiRequest('/auth/logout', { method: 'POST' });
+    } catch (_e) {
+      // Ignore network errors on logout
+    }
+    setActiveToken(null);
+  },
+  getMe: () => apiRequest('/auth/me'),
+  updateProfile: (profileData) =>
+    apiRequest('/auth/profile', {
+      method: 'PUT',
+      body: JSON.stringify(profileData),
     }),
-  deleteNewsletterLead: (id, adminCode) =>
+
+  // SuperAdmin User Management
+  getUsers: () => apiRequest('/admin/users'),
+  createUser: (userData) =>
+    apiRequest('/admin/users', {
+      method: 'POST',
+      body: JSON.stringify(userData),
+    }),
+  deleteUser: (id) =>
+    apiRequest(`/admin/users/${encodeURIComponent(id)}`, {
+      method: 'DELETE',
+    }),
+
+  // Admin Operational Endpoints
+  setMaintenanceStatus: (maintenanceMode) =>
+    apiRequest('/status', {
+      method: 'POST',
+      body: JSON.stringify({ maintenanceMode }),
+    }),
+  getContacts: (status) => {
+    const query = status && status !== 'tutti' ? `?status=${encodeURIComponent(status)}` : '';
+    return apiRequest(`/contacts${query}`);
+  },
+  updateContactStatus: (id, status) =>
+    apiRequest(`/contacts/${encodeURIComponent(id)}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status }),
+    }),
+  deleteContact: (id) =>
+    apiRequest(`/contacts/${encodeURIComponent(id)}`, {
+      method: 'DELETE',
+    }),
+  getNewsletterLeads: () => apiRequest('/newsletter'),
+  deleteNewsletterLead: (id) =>
     apiRequest(`/newsletter/${encodeURIComponent(id)}`, {
       method: 'DELETE',
-      headers: { 'x-admin-code': adminCode },
     }),
 };
-

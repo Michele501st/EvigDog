@@ -77,7 +77,6 @@ function renderHeader(activeKey) {
     </header>
     <nav class="mobile-dropdown" id="mobile-dropdown-menu" aria-label="Menu Mobile">
       ${linksHtml}
-      <a href="admin.html" class="nav-link ${activeKey === 'admin' ? 'active' : ''}">Area Admin</a>
     </nav>
   `;
 
@@ -188,7 +187,6 @@ function renderFooter() {
               <a href="contatti.html">Privacy</a>
               <a href="contatti.html">Cookie</a>
               <a href="manutenzione.html">Manutenzione</a>
-              <a href="admin.html">Admin</a>
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 /**
  * @file app.js
  * @description Express application factory. Registers middleware, REST API routes (/api/*),
- * and serves the static Frontend directory when running in standalone local mode.
+ * authentication and user management routes, and serves the static Frontend directory.
  */
 
 const path = require('path');
@@ -11,6 +11,7 @@ const cors = require('cors');
 const contentRoutes = require('./routes/contentRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const systemRoutes = require('./routes/systemRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 /**
  * Creates and configures the Express application instance.
@@ -26,6 +27,8 @@ function createApp() {
   app.use('/api', systemRoutes);
   app.use('/api', contentRoutes);
   app.use('/api', contactRoutes);
+  app.use('/api/auth', authRoutes);
+  app.use('/api/admin', authRoutes);
 
   // Serve static frontend files when running standalone (outside Nginx container)
   const frontendPath = path.resolve(__dirname, '..', '..', 'frontend');
@@ -40,4 +43,3 @@ function createApp() {
 }
 
 module.exports = { createApp };
-

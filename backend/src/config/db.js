@@ -75,7 +75,7 @@ async function initDatabase() {
     try {
       const clientOptions = {
         ignoreUndefined: true,
-        serverSelectionTimeoutMS: 3000,
+        serverSelectionTimeoutMS: 10000,
       };
 
       if (mongoUsername && mongoPassword) {

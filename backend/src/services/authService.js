@@ -21,7 +21,7 @@ async function ensureSuperAdminSeed() {
   const users = await db.getItems('users');
   if (users.length === 0) {
     const username = process.env.INITIAL_ADMIN_USERNAME || 'admin';
-    const password = process.env.INITIAL_ADMIN_PASSWORD || 'evigdog2026';
+    const password = process.env.INITIAL_ADMIN_PASSWORD || process.env.ADMIN_SECRET_CODE || process.env.ADMIN_ACCESS_CODE || 'evigdog2026';
     const initialSuperAdmin = {
       id: `usr-${Date.now()}-${crypto.randomBytes(4).toString('hex')}`,
       username: username.trim(),

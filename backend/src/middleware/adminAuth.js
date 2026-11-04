@@ -43,7 +43,7 @@ async function requireAuth(req, res, next) {
 
   // Fallback di retrocompatibilità: verifica x-admin-code o ADMIN_ACCESS_CODE
   const legacyCode = req.headers['x-admin-code'];
-  const configuredCode = process.env.ADMIN_ACCESS_CODE || 'evigdog-admin-2026';
+  const configuredCode = process.env.ADMIN_SECRET_CODE || process.env.ADMIN_ACCESS_CODE || 'evigdog-admin-2026';
   if (legacyCode && legacyCode === configuredCode) {
     req.user = {
       id: 'legacy-admin',
